@@ -1,0 +1,15 @@
+{
+  "name": "gsm",
+  "version": "1.0.0",
+  "description": "GSM API for NodeJS",
+  "main": "gsm/index.js",
+  "files": ["gsm/**/*"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stasel",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^7.1.5"
+  }
+}
