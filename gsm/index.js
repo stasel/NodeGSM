@@ -425,6 +425,10 @@ class GSM {
             this.serialPort.write(`${command}\r\n`)
         })
     }
+
+    toString() {
+        return `[${this.connected ? "Connected" : "Not Connected"}] ${this.path} `
+    }
 }
 
 Object.assign(GSM, GSMErrors)
