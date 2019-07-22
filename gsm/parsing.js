@@ -83,10 +83,11 @@ module.exports = class Parser {
             const timezonePrefix =  timezone > 0 ? "+" : "-"
             const timezoneString = timezonePrefix + Math.abs(timezone).toString().padStart(4,"0")
             const timeStamp = `20${date}T${timeParts[0]}${timezoneString}`
+            const senderString =  [PhoneNumberType.text, PhoneNumberType.text2].includes(numberType) ? sender.decodedFromAsciiString() : sender
             messages.push({
                 index: index,
                 status: status,
-                sender: numberType === PhoneNumberType.text ? sender.decodedFromAsciiString() : sender,
+                sender: senderString,
                 time: new Date(timeStamp),
                 text: decodedText,
                 numberType: numberType,

@@ -36,7 +36,8 @@ PhoneBookStorage = Object.freeze({
 PhoneNumberType = Object.freeze({
     national: 129,       // national numbering scheme
     international: 145,  // international numbering scheme (contains the character "+")
-    text: 208            // Text based ex: 'Vodafone'
+    text: 208,           // Text based ex: 'Vodafone'
+    text2: 209            // Text based ex: 'Vodafone'
 })
 
 MessageStorage = Object.freeze({
