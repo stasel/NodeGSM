@@ -1,14 +1,19 @@
 {
-  "name": "gsm",
+  "name": "nodegsm",
   "version": "1.0.0",
   "description": "GSM API for NodeJS",
   "main": "gsm/index.js",
-  "files": ["gsm/**/*"],
+  "files": ["src/**/*"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": ["gsm", "sms"],
   "author": "Stasel",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stasel/NodeGSM/issues"
+  },
+  "homepage": "https://github.com/stasel/NodeGSM",
   "dependencies": {
     "serialport": "^7.1.5"
   }
