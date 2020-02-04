@@ -10,20 +10,24 @@ A simple and easy to use NodeJS API to communicate with serial GSM Modems.
 * Make calls (without audio).
 
 ## Requirements
-* Access to a serial USB GSM Modem
+* Connected USB GSM Modem
 * Working SIM Card
 * NodeJS 11 and later
 
+## Installation
+`npm install nodegsm`
+
+
 ## Usage
 ```JavaScript
-const GSM = require("gsm")
+const GSM = require("nodegsm")
 const gsm = new GSM("/dev/gsmmodem")
 await gsm.connect()
 
-let manufacturer = await gsm.getManufacturerInformation()) 
+const manufacturer = await gsm.getManufacturerInformation()) 
 console.log(manufacturer) // QUALCOMM INCORPORATED
 
-let unreadMessages = await gsm.readSMS(GSM.MessageStorage.sim, GSM.MessageFilter.unread)
+const unreadMessages = await gsm.readSMS(GSM.MessageStorage.sim, GSM.MessageFilter.unread)
 console.log(unreadMessages) // List of unread SMS messages
 
 await gsm.sendSMS("+31111222333","Hello from NodeJS")
