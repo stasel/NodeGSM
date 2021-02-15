@@ -3,11 +3,16 @@
   "version": "1.0.2",
   "description": "GSM API for NodeJS",
   "main": "src/index.js",
-  "files": ["src/**/*"],
+  "files": [
+    "src/**/*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["gsm", "sms"],
+  "keywords": [
+    "gsm",
+    "sms"
+  ],
   "author": "Stasel",
   "license": "MIT",
   "bugs": {
@@ -15,6 +20,6 @@
   },
   "homepage": "https://github.com/stasel/NodeGSM",
   "dependencies": {
-    "serialport": "^9.0.2"
+    "serialport": "^9.0.4"
   }
 }
