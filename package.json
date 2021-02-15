@@ -1,6 +1,6 @@
 {
   "name": "nodegsm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "GSM API for NodeJS",
   "main": "src/index.js",
   "files": [
