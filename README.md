@@ -1,5 +1,7 @@
 # NodeJS GSM API
 
+[![npm](https://img.shields.io/npm/v/nodegsm)](https://www.npmjs.com/package/nodegsm)
+
 A simple and easy to use NodeJS API to communicate with serial GSM Modems.
 
 ## Features
