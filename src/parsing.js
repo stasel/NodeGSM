@@ -60,40 +60,42 @@ module.exports = class Parser {
     parseTextMessageResult(result) {
         const list = result.split("\r\n")
         let messages = []
-        for (let i = 0; i < list.length; i += 2) {
-            const parts = list[i].replace("+CMGL: ","").split(",")
-            
-            const index = parseInt(parts[0])
-            const status = parts[1].trimQuotes()
-            const sender = parts[2].trimQuotes().decodedUCS2Hex()
-            const date = parts[4].trimQuotes().replace(/\//g,"-")
-            const time = parts[5].trimQuotes()
-            const numberType = parseInt(parts[6])
-            const textLength = parseInt(parts[7])
-            const messageText = list[i+1]
-
-            // Message Text decode. Can be either UTF-8 or UCS2. We check this by the char byte size
-            const textBuffer = Buffer.from(messageText,"hex")
-            const textCharSize = textBuffer.length / textLength
-            const decodedText = textCharSize == 2 ? messageText.decodedUCS2Hex() : textBuffer.toString("utf-8")
-            
-            //Time calculate
-            const timeParts = time.split("+")
-            const timezone = parseFloat(timeParts[1])/4.0 * 100
-            const timezonePrefix =  timezone > 0 ? "+" : "-"
-            const timezoneString = timezonePrefix + Math.abs(timezone).toString().padStart(4,"0")
-            const timeStamp = `20${date}T${timeParts[0]}${timezoneString}`
-            const senderString =  [PhoneNumberType.text, PhoneNumberType.text2].includes(numberType) ? sender.decodedFromAsciiString() : sender
-            messages.push({
-                index: index,
-                status: status,
-                sender: senderString,
-                time: new Date(timeStamp),
-                text: decodedText,
-                numberType: numberType,
-                rawHeader: list[i],
-                rawMessage: messageText,
-            })
+        if(list.length > 1){ // Remove annoying error when no messages received
+            for (let i = 0; i < list.length; i += 2) {
+                const parts = list[i].replace("+CMGL: ","").split(",")
+                
+                const index = parseInt(parts[0])
+                const status = parts[1].trimQuotes()
+                const sender = parts[2].trimQuotes().decodedUCS2Hex()
+                const date = parts[4].trimQuotes().replace(/\//g,"-")
+                const time = parts[5].trimQuotes()
+                const numberType = parseInt(parts[6])
+                const textLength = parseInt(parts[7])
+                const messageText = list[i+1]
+    
+                // Message Text decode. Can be either UTF-8 or UCS2. We check this by the char byte size
+                const textBuffer = Buffer.from(messageText,"hex")
+                const textCharSize = textBuffer.length / textLength
+                const decodedText = textCharSize == 2 ? messageText.decodedUCS2Hex() : textBuffer.toString("utf-8")
+                
+                //Time calculate
+                const timeParts = time.split("+")
+                const timezone = parseFloat(timeParts[1])/4.0 * 100
+                const timezonePrefix =  timezone > 0 ? "+" : "-"
+                const timezoneString = timezonePrefix + Math.abs(timezone).toString().padStart(4,"0")
+                const timeStamp = `20${date}T${timeParts[0]}${timezoneString}`
+                const senderString =  [PhoneNumberType.text, PhoneNumberType.text2].includes(numberType) ? sender.decodedFromAsciiString() : sender
+                messages.push({
+                    index: index,
+                    status: status,
+                    sender: senderString,
+                    time: new Date(timeStamp),
+                    text: decodedText,
+                    numberType: numberType,
+                    rawHeader: list[i],
+                    rawMessage: messageText,
+                })
+            }
         }
         return messages
     }
